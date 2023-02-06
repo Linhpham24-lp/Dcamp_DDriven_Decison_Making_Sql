@@ -2,6 +2,9 @@ SELECT *
 FROM renting AS r
 LEFT JOIN movies AS m -- Augment the table with information about movies
 ON r.movie_id = m.movie_id;
+
+
+
 SELECT *
 FROM renting AS r
 LEFT JOIN movies AS m
@@ -12,6 +15,9 @@ WHERE r.movie_id IN ( -- Select records of movies with at least 4 ratings
 	GROUP BY movie_id
 	HAVING COUNT(rating) >= 4 )
 AND r.date_renting >= '2018-04-01'; -- Select records of movie rentals since 2018-04-01
+
+
+
 SELECT m.genre, -- For each genre, calculate:
 	   AVG(r.rating) AS avg_rating,-- The average rating and use the alias avg_rating
 	   COUNT(r.rating) AS n_rating,-- The number of ratings and use the alias n_rating
@@ -27,6 +33,9 @@ WHERE r.movie_id IN (
 	HAVING COUNT(rating) >= 3)
 AND r.date_renting >= '2018-01-01'
 GROUP BY m.genre;
+
+
+
 SELECT genre,
 	   AVG(rating) AS avg_rating,
 	   COUNT(rating) AS n_rating,
@@ -43,6 +52,9 @@ WHERE r.movie_id IN (
 AND r.date_renting >= '2018-01-01'
 GROUP BY genre
 ORDER BY avg_rating DESC; -- Order the table by decreasing average rating
+
+
+
 -- Join the tables
 SELECT *
 FROM renting AS r
@@ -50,6 +62,9 @@ LEFT JOIN actsin AS ai
 ON r.movie_id = ai.movie_id
 LEFT JOIN actors AS a
 ON ai.actor_id = a.actor_id;
+
+
+
 SELECT a.nationality,
        a.gender,
 	   AVG(r.rating) AS avg_rating, -- The average rating
@@ -68,6 +83,9 @@ WHERE r.movie_id IN (
 	HAVING COUNT(rating) >=4 )
 AND r.date_renting >= '2018-04-01'
 GROUP BY (a.nationality, a.gender); -- Report results for each combination of the actors' nationality and gender
+
+
+
 SELECT a.nationality,
        a.gender,
 	   AVG(r.rating) AS avg_rating,
